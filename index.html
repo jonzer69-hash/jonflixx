@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My AI Cinema</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body { font-family: 'Helvetica Neue', Arial, sans-serif; }
+    .row { scrollbar-width: none; }
+    .row::-webkit-scrollbar { display: none; }
+    .thumbnail { transition: all 0.4s ease; }
+    .thumbnail:hover { transform: scale(1.18); box-shadow: 0 30px 60px rgba(0,0,0,0.9); }
+    .hero-title { text-shadow: 6px 6px 25px rgba(0,0,0,0.95); }
+  </style>
+</head>
+<body class="bg-zinc-950 text-white min-h-screen">
+
+  <!-- HEADER -->
+  <header class="fixed top-0 w-full bg-black/95 backdrop-blur-xl z-50">
+    <div class="max-w-screen-2xl mx-auto px-10 py-5 flex items-center justify-between">
+      <div class="flex items-center gap-12">
+        <h1 class="text-5xl font-black text-red-600 tracking-tighter">My AI</h1>
+        <nav class="flex gap-8 text-sm font-medium">
+          <a href="#" class="hover:text-red-500">Home</a>
+          <a href="#" class="hover:text-red-500">TV Shows</a>
+          <a href="#" class="hover:text-red-500">Movies</a>
+          <a href="#" class="hover:text-red-500">My List</a>
+        </nav>
+      </div>
+      <input id="search" type="text" placeholder="Search your AI videos..." 
+             class="bg-zinc-900 px-6 py-2.5 rounded-full w-80 focus:outline-none focus:ring-2 focus:ring-red-600 text-sm">
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <div class="relative h-screen bg-cover bg-center" style="background-image: url('https://img.youtube.com/vi/IrNwWee_tfY/maxresdefault.jpg')">
+    <div class="absolute inset-0 bg-gradient-to-r from-black via-black/70 to-transparent"></div>
+    <div class="absolute bottom-40 left-12 max-w-xl">
+      <p class="text-red-500 font-bold tracking-widest">NEW AI SHORT</p>
+      <h1 class="hero-title text-7xl font-black leading-none mb-6">My First AI Video</h1>
+      <button onclick="playVideo('IrNwWee_tfY')" 
+              class="bg-white text-black font-bold px-12 py-4 rounded text-xl hover:bg-gray-200 flex items-center gap-3">
+        ▶ PLAY
+      </button>
+    </div>
+  </div>
+
+  <!-- ROWS -->
+  <div class="max-w-screen-2xl mx-auto px-10 pb-20 -mt-28 relative z-10 space-y-14">
+
+    <!-- My Videos (all 4) -->
+    <div>
+      <h3 class="text-2xl font-semibold mb-5">My Videos</h3>
+      <div class="flex gap-5 overflow-x-auto row">
+        <div onclick="playVideo('IrNwWee_tfY')" class="thumbnail min-w-[300px] cursor-pointer rounded-xl overflow-hidden">
+          <img src="https://img.youtube.com/vi/IrNwWee_tfY/hqdefault.jpg" class="w-full">
+        </div>
+        <div onclick="playVideo('p21LQY7pWlE')" class="thumbnail min-w-[300px] cursor-pointer rounded-xl overflow-hidden">
+          <img src="https://img.youtube.com/vi/p21LQY7pWlE/hqdefault.jpg" class="w-full">
+        </div>
+        <div onclick="playVideo('amX942yDimk')" class="thumbnail min-w-[300px] cursor-pointer rounded-xl overflow-hidden">
+          <img src="https://img.youtube.com/vi/amX942yDimk/hqdefault.jpg" class="w-full">
+        </div>
+        <div onclick="playVideo('YNgrrJF_0qU')" class="thumbnail min-w-[300px] cursor-pointer rounded-xl overflow-hidden">
+          <img src="https://img.youtube.com/vi/YNgrrJF_0qU/hqdefault.jpg" class="w-full">
+        </div>
+      </div>
+    </div>
+
+    <!-- Trending -->
+    <div>
+      <h3 class="text-2xl font-semibold mb-5">Trending</h3>
+      <div class="flex gap-5 overflow-x-auto row">
+        <div onclick="playVideo('p21LQY7pWlE')" class="thumbnail min-w-[300px] cursor-pointer rounded-xl overflow-hidden">
+          <img src="https://img.youtube.com/vi/p21LQY7pWlE/hqdefault.jpg" class="w-full">
+        </div>
+        <div onclick="playVideo('amX942yDimk')" class="thumbnail min-w-[300px] cursor-pointer rounded-xl overflow-hidden">
+          <img src="https://img.youtube.com/vi/amX942yDimk/hqdefault.jpg" class="w-full">
+        </div>
+        <div onclick="playVideo('YNgrrJF_0qU')" class="thumbnail min-w-[300px] cursor-pointer rounded-xl overflow-hidden">
+          <img src="https://img.youtube.com/vi/YNgrrJF_0qU/hqdefault.jpg" class="w-full">
+        </div>
+      </div>
+    </div>
+
+    <!-- New Releases -->
+    <div>
+      <h3 class="text-2xl font-semibold mb-5">New Releases</h3>
+      <div class="flex gap-5 overflow-x-auto row">
+        <div onclick="playVideo('IrNwWee_tfY')" class="thumbnail min-w-[300px] cursor-pointer rounded-xl overflow-hidden">
+          <img src="https://img.youtube.com/vi/IrNwWee_tfY/hqdefault.jpg" class="w-full">
+        </div>
+        <div onclick="playVideo('p21LQY7pWlE')" class="thumbnail min-w-[300px] cursor-pointer rounded-xl overflow-hidden">
+          <img src="https://img.youtube.com/vi/p21LQY7pWlE/hqdefault.jpg" class="w-full">
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- VIDEO PLAYER -->
+  <div id="modal" class="hidden fixed inset-0 bg-black/95 flex items-center justify-center z-[100]">
+    <div class="max-w-6xl w-full px-6">
+      <button onclick="closeModal()" class="absolute top-8 right-10 text-5xl text-white">✕</button>
+      <iframe id="player" class="w-full aspect-video rounded-2xl" frameborder="0" allowfullscreen></iframe>
+    </div>
+  </div>
+
+  <script>
+    function playVideo(id) {
+      document.getElementById('player').src = `https://www.youtube.com/embed/${id}?autoplay=1`;
+      document.getElementById('modal').classList.remove('hidden');
+    }
+    function closeModal() {
+      document.getElementById('player').src = '';
+      document.getElementById('modal').classList.add('hidden');
+    }
+  </script>
+</body>
+</html>
